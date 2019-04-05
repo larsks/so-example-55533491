@@ -2,15 +2,6 @@
 version: "3"
 
 services:
-  webserver:
-    build:
-      context: web
-    labels:
-      traefik.enable: true
-      traefik.port: 80
-      traefik.backend: webserver
-      traefik.frontend.rule: "PathPrefix:/"
-
   frontend:
     image: traefik
     command:
@@ -21,3 +12,9 @@ services:
     ports:
       - "80:80"
       - "127.0.0.1:8080:8080"
+    networks:
+      backend:
+
+networks:
+  backend:
+    external: true
